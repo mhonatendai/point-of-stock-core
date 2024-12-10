@@ -1,6 +1,5 @@
 package com.tenstech.shopper.user;
 
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -19,4 +18,16 @@ public class UserDto {
 
     @NotEmpty(message = "Password should not be empty")
     private String password;
+
+    private String phone;
+
+    private String address;
+
+    private String city;
+
+    @NotEmpty(message = "First name should not be empty")
+    private String firstName;
+
+    @NotEmpty(message = "Last name should not be empty")
+    private String lastName;
 }
