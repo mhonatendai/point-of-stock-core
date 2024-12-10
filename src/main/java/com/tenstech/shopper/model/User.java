@@ -21,4 +21,23 @@ package com.tenstech.shopper.model;
 
        @Column(nullable = false)
        private String roles;
+
+       @Column
+       private String email;
+
+       @Column
+       private String phone;
+
+       @Column
+       private String address;
+
+       @Column
+       private String city;
+
+       @Column
+       private String firstName;
+
+       @Column
+       private String lastName;
+
    }
