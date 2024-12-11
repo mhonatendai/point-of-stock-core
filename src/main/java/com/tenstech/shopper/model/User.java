@@ -11,6 +11,7 @@ package com.tenstech.shopper.model;
    @AllArgsConstructor
    @Getter
    @Setter
+   @Table(name = "app_user")
    public class User extends BaseEntity{
 
        @Column(nullable = false, unique = true)
@@ -33,6 +34,9 @@ package com.tenstech.shopper.model;
 
        @Column
        private String city;
+
+       @Column
+       private String country;
 
        @Column
        private String firstName;

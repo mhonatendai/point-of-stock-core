@@ -21,12 +21,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
-        log.info("This is an information message: {} : {}", userDto.getPassword(), userDto.getUsername());
-        // Validate the registration data
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body("Invalid registration data");
+        try{
+            log.info("This is an information message: {} : {}", userDto.getPassword(), userDto.getUsername());
+            // Validate the registration data
+            if (result.hasErrors()) {
+                return ResponseEntity.badRequest().body("Invalid registration data");
+            }
+            userService.registerUser(userDto);
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        userService.registerUser(userDto);
+
         return ResponseEntity.ok("User registered successfully!");
     }
 

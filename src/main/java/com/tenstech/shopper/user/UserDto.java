@@ -25,6 +25,8 @@ public class UserDto {
 
     private String city;
 
+    private String country;
+
     @NotEmpty(message = "First name should not be empty")
     private String firstName;
 
