@@ -1,13 +1,11 @@
 package com.tenstech.shopper.user;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-// This can be a REST controller
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
@@ -23,7 +21,6 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
         try{
             log.info("This is an information message: {} : {}", userDto.getPassword(), userDto.getUsername());
-            // Validate the registration data
             if (result.hasErrors()) {
                 return ResponseEntity.badRequest().body("Invalid registration data");
             }
