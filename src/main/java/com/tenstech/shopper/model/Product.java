@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Product extends BaseEntity {
+public class Product extends AuditedEntity {
 
     private String name;
     private String description;

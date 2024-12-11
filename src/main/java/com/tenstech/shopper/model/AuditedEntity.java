@@ -1,8 +1,7 @@
 package com.tenstech.shopper.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,40 +15,27 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Setter
+@Getter
 public abstract class AuditedEntity implements Serializable {
-
-    protected LocalDateTime created;
-    protected LocalDateTime lastModified;
-    protected String createdBy;
-    protected String modifiedBy;
 
     @CreatedDate
     @Column(name = "created", nullable = false, updatable = false)
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
+    protected LocalDateTime created;
 
     @LastModifiedDate
     @Column(name = "last_modified")
-    public LocalDateTime getLastModified() {
-        return lastModified;
-    }
-
-    private void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = lastModified;
-    }
+    protected LocalDateTime lastModified;
 
     @Column(name = "created_by")
     @CreatedBy
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
+    protected String createdBy;
 
     @Column(name = "last_modified_by")
     @LastModifiedBy
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
+    protected String modifiedBy;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, nullable = false, updatable = false)
+    private Long id;
 }

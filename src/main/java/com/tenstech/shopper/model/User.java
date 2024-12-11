@@ -12,7 +12,7 @@ package com.tenstech.shopper.model;
    @Getter
    @Setter
    @Table(name = "app_user")
-   public class User extends BaseEntity{
+   public class User extends AuditedEntity{
 
        @Column(nullable = false, unique = true)
        private String username;
@@ -23,7 +23,7 @@ package com.tenstech.shopper.model;
        @Column(nullable = false)
        private String roles;
 
-       @Column
+       @Column(unique = true)
        private String email;
 
        @Column
