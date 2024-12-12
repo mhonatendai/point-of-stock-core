@@ -1,5 +1,6 @@
 package com.tenstech.shopper.user;
 
+import com.tenstech.shopper.mapper.UserMapper;
 import com.tenstech.shopper.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,25 +12,17 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final UserMapper userMapper;
+
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
     public void registerUser(UserDto userDto) {
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User user = userMapper.userDTOToUser(userDto);
         user.setRoles("ROLE_USER");
-        user.setAddress(userDto.getAddress());
-        user.setCity(userDto.getCity());
-        user.setCountry(userDto.getCountry());
-        user.setEmail(userDto.getEmail());
-        user.setPhone(userDto.getPhone());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
         userRepository.save(user);
     }
 

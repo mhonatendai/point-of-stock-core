@@ -20,7 +20,6 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
         try{
-            log.info("This is an information message: {} : {}", userDto.getPassword(), userDto.getUsername());
             if (result.hasErrors()) {
                 return ResponseEntity.badRequest().body("Invalid registration data");
             }
