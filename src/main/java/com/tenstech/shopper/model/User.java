@@ -44,4 +44,16 @@ package com.tenstech.shopper.model;
        @Column
        private String lastName;
 
+       @Column
+       private String gender;
+
+       @Column
+       private Boolean accountNonExpired;
+
+       @Column
+       private Boolean accountNonLocked;
+
+       @Column
+       private Boolean enabled;
+
    }
