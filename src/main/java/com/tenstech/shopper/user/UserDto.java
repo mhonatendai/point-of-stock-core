@@ -1,5 +1,6 @@
 package com.tenstech.shopper.user;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -32,4 +33,12 @@ public class UserDto {
 
     @NotEmpty(message = "Last name should not be empty")
     private String lastName;
+
+    private String gender;
+
+    private Boolean accountNonExpired;
+
+    private Boolean accountNonLocked;
+
+    private Boolean enabled;
 }
