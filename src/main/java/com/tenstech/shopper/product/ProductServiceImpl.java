@@ -38,22 +38,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
         Product product = productRepository.findById(id).orElseThrow();
-        product.setName(productDTO.name());
-        product.setDescription(productDTO.description());
-        product.setPrice(productDTO.price());
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
         Product updatedProduct = productRepository.save(product);
         return convertToDTO(updatedProduct);
     }
 
     private ProductDTO convertToDTO(Product product) {
-        return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice());
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setName(product.getName());
+        productDTO.setPrice(product.getPrice());
+        return productDTO;
     }
 
     private Product convertToEntity(ProductDTO productDTO) {
         Product product = new Product();
-        product.setName(productDTO.name());
-        product.setDescription(productDTO.description());
-        product.setPrice(productDTO.price());
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
         return product;
     }
 }
