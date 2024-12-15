@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class UserDto {
 
+    private Long id;
+
     @NotEmpty(message = "Username should not be empty")
     private String username;
 
@@ -139,5 +141,13 @@ public class UserDto {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
