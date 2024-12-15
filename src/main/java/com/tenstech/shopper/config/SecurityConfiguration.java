@@ -44,11 +44,11 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll()
-                        .anyRequest().authenticated() // Require authentication for all other requests
+                        .anyRequest().authenticated()
                 )
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll) // Allow form login for all users
-                .logout(LogoutConfigurer::permitAll); // Allow logout for all users
-        return http.build(); // Build the security filter chain
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .logout(LogoutConfigurer::permitAll);
+        return http.build();
     }
 
     @Bean
