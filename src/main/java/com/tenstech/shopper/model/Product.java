@@ -18,8 +18,16 @@ public class Product extends AuditedEntity {
 
     @Column
     private String description;
+
+    @Column
     private BigDecimal price;
+
+    @Column
     private BigDecimal quantity;
+
+    @Column
     private String stockKeepingUnit;
+
+    @Column
     private String barcode;
 }

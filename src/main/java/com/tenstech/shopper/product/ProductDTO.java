@@ -1,5 +1,6 @@
 package com.tenstech.shopper.product;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +13,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-
+    private BigDecimal quantity;
+    private String stockKeepingUnit;
+    private String barcode;
 }
