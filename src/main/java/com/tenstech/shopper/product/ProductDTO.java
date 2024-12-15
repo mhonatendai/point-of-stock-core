@@ -1,6 +1,5 @@
 package com.tenstech.shopper.product;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
