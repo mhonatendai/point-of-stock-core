@@ -1,6 +1,6 @@
 package com.tenstech.shopper.config;
 
-import com.tenstech.shopper.user.CustomUserDetailsService;
+import com.tenstech.shopper.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +22,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Bean
 
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService); // Set the UserDetailsService
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

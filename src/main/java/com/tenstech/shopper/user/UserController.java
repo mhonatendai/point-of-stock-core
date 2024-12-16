@@ -25,7 +25,7 @@ public class UserController {
             }
             userService.registerUser(userDto);
         }catch (Exception e) {
-            e.printStackTrace();
+           log.error(e.getMessage());
         }
 
         return ResponseEntity.ok("User registered successfully!");
