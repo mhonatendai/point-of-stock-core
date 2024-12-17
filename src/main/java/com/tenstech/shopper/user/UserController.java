@@ -18,17 +18,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
         try{
-            if (result.hasErrors()) {
-                return ResponseEntity.badRequest().body("Invalid registration data");
-            }
-            userService.registerUser(userDto);
+            return ResponseEntity.ok(userService.registerUser(userDto));
         }catch (Exception e) {
            log.error(e.getMessage());
         }
-
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.badRequest().build();
     }
 
     // Add the login endpoint if using session-based authentication
