@@ -24,12 +24,12 @@ public class UserService implements UserDetailsService {
         this.userMapper = userMapper;
     }
 
-    public void registerUser(UserDto userDto) throws Exception{
+    public UserDto registerUser(UserDto userDto) throws Exception{
         User user = userMapper.userDTOToUser(userDto);
         user.setRoles("ROLE_USER");
         user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
         try{
-            userRepository.save(user);
+            return userMapper.userToUserDTO(userRepository.save(user));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
