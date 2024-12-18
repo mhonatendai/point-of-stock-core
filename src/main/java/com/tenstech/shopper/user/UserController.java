@@ -1,6 +1,9 @@
 package com.tenstech.shopper.user;
 
+import com.tenstech.shopper.exception.UserRegistrationException;
+import com.tenstech.shopper.exception.ValidationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +21,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody @Validated UserDto userDto, BindingResult result) {
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Validated UserDto userDto) {
         try{
             return ResponseEntity.ok(userService.registerUser(userDto));
+        }catch (ValidationException e) {
+            log.error("Validation error: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }catch (UserRegistrationException e) {
+            log.error("User registration error: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }catch (Exception e) {
            log.error(e.getMessage());
         }
