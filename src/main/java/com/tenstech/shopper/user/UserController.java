@@ -1,10 +1,8 @@
 package com.tenstech.shopper.user;
 
-import com.tenstech.shopper.exception.InvalidRequestException;
-import com.tenstech.shopper.exception.UserRegistrationException;
-import com.tenstech.shopper.exception.ValidationException;
+import com.tenstech.shopper.exception.BusinessErrorCodes;
+import com.tenstech.shopper.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,17 +20,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@RequestBody @Validated UserDto userDto) {
-        try{
-            return ResponseEntity.ok(userService.registerUser(userDto));
-        }catch (InvalidRequestException e) {
-            throw new InvalidRequestException("Invalid request");
-        }catch (UserRegistrationException e) {
-            log.error("User registration error: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }catch (Exception e) {
-           log.error(e.getMessage());
-        }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(userService.registerUser(userDto).orElseThrow( () -> new BusinessException(BusinessErrorCodes.GENERAL_EXCEPTION)));
     }
 
     @PostMapping("/login")
