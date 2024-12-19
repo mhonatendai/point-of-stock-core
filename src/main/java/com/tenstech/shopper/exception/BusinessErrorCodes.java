@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum BusinessErrorCodes {
 
     USER_NOT_FOUND("User Not Found", HttpStatus.BAD_REQUEST),
+    INVALID_REQUEST("Invalid Request", HttpStatus.BAD_REQUEST),
     GENERAL_EXCEPTION("Unexpected Error processing your request", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final String message;
