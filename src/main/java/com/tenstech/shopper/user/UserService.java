@@ -1,6 +1,6 @@
 package com.tenstech.shopper.user;
 
-import com.tenstech.shopper.mapper.UserMapper;
+import com.tenstech.shopper.mapper.TypeMapper;
 import com.tenstech.shopper.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,18 +17,18 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
 
-    private final UserMapper userMapper;
+    private final TypeMapper typeMapper;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, TypeMapper typeMapper) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
+        this.typeMapper = typeMapper;
     }
 
     public Optional<UserDto> registerUser(UserDto userDto){
-        User user = userMapper.userDTOToUser(userDto);
+        User user = typeMapper.userDTOToUser(userDto);
         user.setRoles("ROLE_USER");
         user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
-        return Optional.ofNullable(userMapper.userToUserDTO(userRepository.save(user)));
+        return Optional.ofNullable(typeMapper.userToUserDTO(userRepository.save(user)));
     }
 
     public Optional<User> getUserByUsername(String userName) {

@@ -5,7 +5,7 @@ import com.tenstech.shopper.user.UserDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface TypeMapper {
     UserDto userToUserDTO(User user);
     User userDTOToUser(UserDto userDTO);
 }
