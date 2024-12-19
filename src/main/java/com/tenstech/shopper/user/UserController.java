@@ -5,7 +5,6 @@ import com.tenstech.shopper.exception.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,11 +35,8 @@ public class UserController {
         return ResponseEntity.badRequest().build();
     }
 
-    // Add the login endpoint if using session-based authentication
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody @Validated UserDto userDto) {
-        // You would typically delegate to a separate Authentication Service
-        // For example:
 //        boolean isAuthenticated = userService.login(userDto.getUsername(), userDto.getPassword());
 //        if (isAuthenticated) {
 //            return ResponseEntity.ok("Login successful!");
