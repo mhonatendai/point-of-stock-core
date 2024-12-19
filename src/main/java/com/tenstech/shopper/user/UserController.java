@@ -1,5 +1,6 @@
 package com.tenstech.shopper.user;
 
+import com.tenstech.shopper.exception.InvalidRequestException;
 import com.tenstech.shopper.exception.UserRegistrationException;
 import com.tenstech.shopper.exception.ValidationException;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,8 @@ public class UserController {
     public ResponseEntity<UserDto> registerUser(@RequestBody @Validated UserDto userDto) {
         try{
             return ResponseEntity.ok(userService.registerUser(userDto));
-        }catch (ValidationException e) {
-            log.error("Validation error: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+        }catch (InvalidRequestException e) {
+            throw new InvalidRequestException("Invalid request");
         }catch (UserRegistrationException e) {
             log.error("User registration error: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
