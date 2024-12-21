@@ -1,5 +1,6 @@
 package com.tenstech.pointofstock.user;
 
+import com.tenstech.pointofstock.common.enums.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class UserDto {
     @NotEmpty(message = "Last name should not be empty")
     private String lastName;
 
-    private String gender;
+    private Gender gender;
 
     private Boolean accountNonExpired;
 

@@ -1,5 +1,6 @@
 package com.tenstech.pointofstock.model;
 
+   import com.tenstech.pointofstock.common.enums.Gender;
    import jakarta.persistence.*;
    import lombok.AllArgsConstructor;
    import lombok.Getter;
@@ -45,7 +46,8 @@ package com.tenstech.pointofstock.model;
        private String lastName;
 
        @Column
-       private String gender;
+       @Enumerated(EnumType.STRING)
+       private Gender gender;
 
        @Column
        private Boolean accountNonExpired;
