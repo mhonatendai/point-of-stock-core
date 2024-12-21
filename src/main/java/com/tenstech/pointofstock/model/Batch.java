@@ -37,4 +37,7 @@ public class Batch extends AuditedEntity{
 
     @OneToOne
     private UnitOfMeasure unitOfMeasure;
+
+    @OneToOne
+    private Supplier supplier;
 }
