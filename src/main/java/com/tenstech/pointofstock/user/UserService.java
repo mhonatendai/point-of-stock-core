@@ -12,22 +12,24 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
 
+    private final BCryptPasswordEncoder passwordEncoder;
 
     private final TypeMapper typeMapper;
 
-    public UserService(UserRepository userRepository, TypeMapper typeMapper) {
+    public UserService(UserRepository userRepository, TypeMapper typeMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.typeMapper = typeMapper;
+        this.passwordEncoder = bCryptPasswordEncoder;
     }
 
     public Optional<UserDto> registerUser(UserDto userDto){
         User user = typeMapper.userDTOToUser(userDto);
         user.setRoles("ROLE_USER");
-        user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
+        user.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
         return Optional.ofNullable(typeMapper.userToUserDTO(userRepository.save(user)));
     }
 
@@ -35,11 +37,12 @@ public class UserService implements UserDetailsService {
         return this.userRepository.findByUsername(userName);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), new ArrayList<>());
+    public UserDto authenticateUser(String username, String password) {
+        Optional<User> optionalUser = this.userRepository.findByUsername(username);
+
+        if(optionalUser.isPresent() && passwordEncoder.matches(password, optionalUser.get().getPassword())){
+           return typeMapper.userToUserDTO(optionalUser.get());
+        }
+        return null;
     }
 }
