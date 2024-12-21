@@ -22,8 +22,5 @@ public class Product extends AuditedEntity {
     private BigDecimal price;
 
     @Column
-    private BigDecimal quantity;
-
-    @Column
     private String barcode;
 }

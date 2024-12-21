@@ -12,6 +12,5 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private BigDecimal quantity;
     private String barcode;
 }

@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.tenstech</groupId>
-	<artifactId>shopper</artifactId>
+	<artifactId>point-of-stock-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shopper</name>
-	<description>Shooper</description>
+	<name>point-of-stock-core</name>
+	<description>Point of Stock Core System</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -85,7 +85,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
-					<finalName>shopper</finalName>
+					<finalName>point-of-stock-core</finalName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
