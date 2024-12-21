@@ -26,17 +26,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> loginUser(@RequestBody @Validated LoginDTO loginDTO) {
+    public ResponseEntity<ApiResponse<UserDto>> loginUser(@RequestBody @Validated LoginDTO loginDTO) {
 
         UserDto authenticateUser = userService.authenticateUser(loginDTO.getUsername(), loginDTO.getPassword());
-        ApiResponse apiResponse = new ApiResponse();
+        String apiMessage = authenticateUser != null ? "Login successful" : "Invalid username or password.";
+
+        ApiResponse<UserDto> apiResponse = new ApiResponse<>();
+        apiResponse.setData(authenticateUser);
+        apiResponse.setApiMessage(apiMessage);
 
         if (authenticateUser != null) {
-            apiResponse.setUserDto(authenticateUser);
-            apiResponse.setApiMessage("Login successful");
+            apiResponse.setData(authenticateUser);
             return ResponseEntity.ok(apiResponse);
         } else {
-            apiResponse.setApiMessage("Invalid username or password.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);
         }
     }
