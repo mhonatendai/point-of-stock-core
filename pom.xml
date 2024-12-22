@@ -30,6 +30,7 @@
 		<java.version>17</java.version>
 		<org.projectlombok.version>1.18.36</org.projectlombok.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
+		<logback.version>1.5.13</logback.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,6 +75,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 
 	</dependencies>
