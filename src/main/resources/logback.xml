@@ -1,15 +1,36 @@
-<configuration>
+<configuration debug="true">
 
-    <appender name = "CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%blue(%t)] %logger{45} - %msg%n">
+    </property>
+    <property name="LOG_FILE" value="./logs/point-of-stock-core.log"/>
+    <property name="DATE_SUFFIX" value="%d{yyyy-MM-dd}"/>
+
+
+<appender name = "CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level [%blue(%t)] %logger{45} - %msg%n"
+                ${LOG_PATTERN}
             </pattern>
         </encoder>
     </appender>
 
-    <root level="DEBUG">
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <encoder>
+            <pattern>
+                ${LOG_PATTERN}
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1KB</maxFileSize>
+            <maximumHistory>100</maximumHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ROLLING_FILE"/>
     </root>
 
 </configuration>
