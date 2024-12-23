@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
@@ -28,6 +31,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<UserDto>> loginUser(@RequestBody @Validated LoginDTO loginDTO) {
 
+        log.info("Attempting to login at {}", LocalDateTime.now());
         UserDto authenticateUser = userService.authenticateUser(loginDTO.getUsername(), loginDTO.getPassword());
         String apiMessage = authenticateUser != null ? "Login successful" : "Invalid username or password.";
 

@@ -1,11 +1,15 @@
-<configuration scan="true" scanPeriod="15 seconds" debug="true">
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<configuration>
+
+    <appender name = "CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>
+                "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level [%blue(%t)] %logger{45} - %msg%n"
+            </pattern>
         </encoder>
     </appender>
-    <root level="debug">
-        <appender-ref ref="STDOUT" />
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
     </root>
-    <logger name="com.tenstech.pointofstock" level="info"/>
+
 </configuration>
