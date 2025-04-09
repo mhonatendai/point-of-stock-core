@@ -1,5 +1,7 @@
 package com.tenstech.pointofstock.supplier;
 
+import com.tenstech.pointofstock.mapper.TypeMapper;
+import com.tenstech.pointofstock.model.Product;
 import com.tenstech.pointofstock.model.Supplier;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,11 @@ public class SupplierServiceImpl implements SupplierService {
 
     private final SupplierRepository supplierRepository;
 
-    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+    private final TypeMapper typeMapper;
+
+    public SupplierServiceImpl(SupplierRepository supplierRepository, TypeMapper typeMapper) {
         this.supplierRepository = supplierRepository;
+        this.typeMapper = typeMapper;
     }
 
     @Override
@@ -27,11 +32,15 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierDTO createSupplier(SupplierDTO supplierDTO) {
-        return null;
+        Supplier supplier = supplierRepository.save(typeMapper.supplierDTOToSupplier(supplierDTO));
+        return typeMapper.supplierToSupplierDTO(supplier);
     }
 
     @Override
     public SupplierDTO updateSupplier(Long id, SupplierDTO supplierDTO) {
-        return null;
+        Supplier existingSupplier = supplierRepository.findById(id).orElseThrow();
+        Supplier updatedSupplierWithData = typeMapper.supplierDTOToSupplier(supplierDTO);
+        updatedSupplierWithData.setId(existingSupplier.getId());
+        return typeMapper.supplierToSupplierDTO(supplierRepository.save(updatedSupplierWithData));
     }
 }

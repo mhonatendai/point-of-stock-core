@@ -1,5 +1,6 @@
 package com.tenstech.pointofstock.product;
 
+import com.tenstech.pointofstock.mapper.TypeMapper;
 import com.tenstech.pointofstock.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -12,27 +13,29 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    private final TypeMapper typeMapper;
+
+    public ProductServiceImpl(ProductRepository productRepository, TypeMapper typeMapper) {
         this.productRepository = productRepository;
+        this.typeMapper = typeMapper;
     }
 
     @Override
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream()
-                .map(this::convertToDTO)
+                .map(typeMapper::productToProductDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<ProductDTO> getProductById(Long id) {
-        return productRepository.findById(id).map(this::convertToDTO);
+        return productRepository.findById(id).map(typeMapper::productToProductDTO);
     }
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
-        Product product = convertToEntity(productDTO);
-        Product savedProduct = productRepository.save(product);
-        return convertToDTO(savedProduct);
+        Product savedProduct = productRepository.save(typeMapper.productDTOToProduct(productDTO));
+        return typeMapper.productToProductDTO(savedProduct);
     }
 
     @Override
@@ -42,23 +45,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         Product updatedProduct = productRepository.save(product);
-        return convertToDTO(updatedProduct);
+        return typeMapper.productToProductDTO(updatedProduct);
     }
 
-    private ProductDTO convertToDTO(Product product) {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(product.getId());
-        productDTO.setDescription(product.getDescription());
-        productDTO.setName(product.getName());
-        productDTO.setPrice(product.getPrice());
-        return productDTO;
-    }
-
-    private Product convertToEntity(ProductDTO productDTO) {
-        Product product = new Product();
-        product.setName(productDTO.getName());
-        product.setDescription(productDTO.getDescription());
-        product.setPrice(productDTO.getPrice());
-        return product;
-    }
 }
