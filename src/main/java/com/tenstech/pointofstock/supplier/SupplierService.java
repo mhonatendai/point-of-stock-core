@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface SupplierService {
 
-    List<Supplier> findAll();
+    List<SupplierDTO> findAll();
 
-    Optional<Supplier> findById(Long id);
+    Optional<SupplierDTO> findById(Long id);
 
     SupplierDTO createSupplier(SupplierDTO supplierDTO);
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -21,13 +22,15 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<Supplier> findAll() {
-        return supplierRepository.findAll();
+    public List<SupplierDTO> findAll() {
+        return supplierRepository.findAll().stream()
+                .map(typeMapper::supplierToSupplierDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Supplier> findById(Long id) {
-        return supplierRepository.findById(id);
+    public Optional<SupplierDTO> findById(Long id) {
+        return supplierRepository.findById(id).map(typeMapper::supplierToSupplierDTO);
     }
 
     @Override
@@ -43,4 +46,5 @@ public class SupplierServiceImpl implements SupplierService {
         updatedSupplierWithData.setId(existingSupplier.getId());
         return typeMapper.supplierToSupplierDTO(supplierRepository.save(updatedSupplierWithData));
     }
+
 }
