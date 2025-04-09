@@ -25,4 +25,8 @@ public class Supplier extends AuditedEntity{
 
     @Column
     private String website;
+
+    @Column
+    private String contactPerson;
+
 }

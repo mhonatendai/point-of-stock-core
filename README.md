@@ -6,7 +6,7 @@ Cement your Java, Spring, Spring Boot skills in the following domains / subdomai
 * Spring Security - Moving from v5 WebSecurityConfigurerAdapter to v6 SecurityFilterChain.
 * Logging and logback.
 * REST APIs'.
-* Using PostgreSQL.
+* Using PostgreSQL, why PostgreSQL, Postgres Docker Official Image.
 * Spring Data JPA Auditing and Auditor awareness.
 * Exception Handling.
 * Type mapping using Mapstruct - lombok mapstruct binding config as well.
