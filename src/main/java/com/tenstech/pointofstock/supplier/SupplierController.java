@@ -1,6 +1,5 @@
 package com.tenstech.pointofstock.supplier;
 
-import com.tenstech.pointofstock.product.ProductDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,6 @@
 package com.tenstech.pointofstock.supplier;
 
 import com.tenstech.pointofstock.mapper.TypeMapper;
-import com.tenstech.pointofstock.model.Product;
 import com.tenstech.pointofstock.model.Supplier;
 import org.springframework.stereotype.Service;
 
