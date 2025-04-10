@@ -16,7 +16,7 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<SupplierDTO> getAll() {
         return supplierService.findAll();
     }
