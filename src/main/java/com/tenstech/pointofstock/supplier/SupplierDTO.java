@@ -18,4 +18,6 @@ public class SupplierDTO {
     private String website;
 
     private String contactPerson;
+
+    private Long id;
 }

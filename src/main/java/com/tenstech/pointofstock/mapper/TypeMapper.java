@@ -7,6 +7,7 @@ import com.tenstech.pointofstock.product.ProductDTO;
 import com.tenstech.pointofstock.supplier.SupplierDTO;
 import com.tenstech.pointofstock.user.UserDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface TypeMapper {
@@ -17,6 +18,7 @@ public interface TypeMapper {
 
     Supplier supplierDTOToSupplier(SupplierDTO supplierDTO);
 
+    @Mapping(source = "id", target = "id")
     SupplierDTO supplierToSupplierDTO(Supplier supplier);
 
     ProductDTO productToProductDTO(Product product);

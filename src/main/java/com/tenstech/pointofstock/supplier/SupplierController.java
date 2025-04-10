@@ -27,7 +27,7 @@ public class SupplierController {
         return supplierDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public SupplierDTO create(@RequestBody SupplierDTO supplierDTO) {
         return supplierService.createSupplier(supplierDTO);
     }
