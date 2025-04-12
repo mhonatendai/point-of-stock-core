@@ -12,8 +12,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface TypeMapper {
 
+    @Mapping(target = "password", ignore = true)
     UserDto userToUserDTO(User user);
 
+    @Mapping(target = "password", ignore = true)
     User userDTOToUser(UserDto userDTO);
 
     Supplier supplierDTOToSupplier(SupplierDTO supplierDTO);
