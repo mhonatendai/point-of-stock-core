@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
-        product.setPrice(productDTO.getPrice());
+        product.setSellingPrice(productDTO.getPrice());
         Product updatedProduct = productRepository.save(product);
         return typeMapper.productToProductDTO(updatedProduct);
     }

@@ -19,8 +19,14 @@ public class Product extends AuditedEntity {
     private String description;
 
     @Column
-    private BigDecimal price;
+    private BigDecimal purchasePrice;
+
+    @Column
+    private BigDecimal sellingPrice;
 
     @Column
     private String barcode;
+
+    @Column
+    private boolean active = true;
 }

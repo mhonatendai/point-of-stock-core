@@ -29,4 +29,7 @@ public class Supplier extends AuditedEntity{
     @Column
     private String contactPerson;
 
+    @Column
+    private boolean active = true;
+
 }
