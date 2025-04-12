@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
+@CrossOrigin(origins = "http://localhost:4700")
 public class UserController {
 
     private final UserService userService;
