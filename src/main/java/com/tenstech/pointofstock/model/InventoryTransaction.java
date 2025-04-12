@@ -1,5 +1,6 @@
 package com.tenstech.pointofstock.model;
 
+import com.tenstech.pointofstock.common.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -18,10 +19,29 @@ public class InventoryTransaction extends AuditedEntity {
     @Column(nullable = false)
     private LocalDateTime transactionDate = LocalDateTime.now();
 
+    @Column
     private String transactionType;
 
     private String referenceNumber;
 
     private String notes;
+
+    @PrePersist
+    @PreUpdate
+    private void setTransactionTypeValue() {
+        if (this.transactionTypeEnum != null) {
+            this.transactionType = this.transactionTypeEnum.getName();
+        }
+    }
+
+    @Transient
+    private TransactionType transactionTypeEnum;
+
+    public void setTransactionTypeEnum(TransactionType transactionTypeEnum) {
+        this.transactionTypeEnum = transactionTypeEnum;
+        if (transactionTypeEnum != null) {
+            this.transactionType = transactionTypeEnum.getName();
+        }
+    }
 
 }
