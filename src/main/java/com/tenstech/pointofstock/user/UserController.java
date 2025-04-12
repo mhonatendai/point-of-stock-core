@@ -32,14 +32,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<UserDto>> loginUser(@RequestBody @Validated LoginDTO loginDTO) {
 
+        UserDto authenticatedUser = null;
         try {
 
             log.info("Attempting to login at {}", LocalDateTime.now());
-            UserDto authenticatedUser = userService.authenticateUser(loginDTO.getUsername(), loginDTO.getPassword());
-            return ResponseEntity.ok(ApiResponse.<UserDto>builder()
-                    .data(authenticatedUser)
-                    .apiMessage("Login successful")
-                    .build());
+            authenticatedUser = userService.authenticateUser(loginDTO.getUsername(), loginDTO.getPassword());
         } catch (BadCredentialsException e) {
 
             log.warn("Login failed for user: {} due to invalid credentials.", loginDTO.getUsername());
@@ -55,5 +52,10 @@ public class UserController {
                             .apiMessage("An unexpected error occurred during login.")
                             .build());
         }
+
+        return ResponseEntity.ok(ApiResponse.<UserDto>builder()
+                .data(authenticatedUser)
+                .apiMessage("Login successful")
+                .build());
     }
 }

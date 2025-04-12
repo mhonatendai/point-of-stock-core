@@ -2,6 +2,7 @@ package com.tenstech.pointofstock.user;
 
 import com.tenstech.pointofstock.mapper.TypeMapper;
 import com.tenstech.pointofstock.model.User;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,9 +41,15 @@ public class UserService {
     public UserDto authenticateUser(String username, String password) {
         Optional<User> optionalUser = this.userRepository.findByUsername(username);
 
-        if(optionalUser.isPresent() && passwordEncoder.matches(password, optionalUser.get().getPassword())){
-           return typeMapper.userToUserDTO(optionalUser.get());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return typeMapper.userToUserDTO(user);
+            } else {
+                throw new BadCredentialsException("Invalid password");
+            }
+        } else {
+            throw new BadCredentialsException("Invalid username");
         }
-        return null;
     }
 }
