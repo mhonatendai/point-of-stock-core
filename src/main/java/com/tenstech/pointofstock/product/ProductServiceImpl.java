@@ -2,6 +2,7 @@ package com.tenstech.pointofstock.product;
 
 import com.tenstech.pointofstock.mapper.TypeMapper;
 import com.tenstech.pointofstock.model.Product;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -40,6 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
+        log.info("Updating product with id {} to product {}", id, productDTO);
         Product product = productRepository.findById(id).orElseThrow();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());

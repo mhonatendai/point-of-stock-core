@@ -1,9 +1,11 @@
 package com.tenstech.pointofstock.mapper;
 
 import com.tenstech.pointofstock.model.Product;
+import com.tenstech.pointofstock.model.ProductCategory;
 import com.tenstech.pointofstock.model.Supplier;
 import com.tenstech.pointofstock.model.User;
 import com.tenstech.pointofstock.product.ProductDTO;
+import com.tenstech.pointofstock.productcategory.ProductCategoryDTO;
 import com.tenstech.pointofstock.supplier.SupplierDTO;
 import com.tenstech.pointofstock.user.UserDto;
 import org.mapstruct.Mapper;
@@ -26,4 +28,8 @@ public interface TypeMapper {
     ProductDTO productToProductDTO(Product product);
 
     Product productDTOToProduct(ProductDTO productDTO);
+
+    ProductCategoryDTO productCategoryToProductCategoryDTO(ProductCategory productCategory);
+
+    ProductCategory productCategoryDTOToProductCategory(ProductCategoryDTO productCategoryDTO);
 }

@@ -16,7 +16,7 @@ public class ProductCategoryController {
         this.productCategoryService = productCategoryService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<ProductCategoryDTO> getAll() {
         return productCategoryService.getAll();
     }
@@ -27,9 +27,9 @@ public class ProductCategoryController {
         return productCategoryDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ProductCategoryDTO createProduct(@RequestBody ProductCategoryDTO productDTO) {
-        return productCategoryService.create(productDTO);
+    @PostMapping("/create")
+    public ProductCategoryDTO createProduct(@RequestBody ProductCategoryDTO productCategoryDTO) {
+        return productCategoryService.create(productCategoryDTO);
     }
 
 }
