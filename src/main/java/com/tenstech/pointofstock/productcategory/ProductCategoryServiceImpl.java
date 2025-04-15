@@ -2,6 +2,7 @@ package com.tenstech.pointofstock.productcategory;
 
 
 import com.tenstech.pointofstock.mapper.TypeMapper;
+import com.tenstech.pointofstock.model.ProductCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,11 +35,16 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategoryDTO create(ProductCategoryDTO productCategoryDTO) {
-        return null;
+        ProductCategory productCategory = typeMapper.productCategoryDTOToProductCategory(productCategoryDTO);
+        return typeMapper.productCategoryToProductCategoryDTO(productCategoryRepository.save(productCategory));
     }
 
     @Override
     public ProductCategoryDTO update(Long id, ProductCategoryDTO productCategoryDTO) {
-        return null;
+        ProductCategory productCategory = productCategoryRepository.findById(id).orElseThrow();
+        productCategory.setName(productCategoryDTO.getName());
+        productCategory.setDescription(productCategoryDTO.getDescription());
+        return typeMapper.productCategoryToProductCategoryDTO(productCategoryRepository.save(productCategory));
     }
+
 }
