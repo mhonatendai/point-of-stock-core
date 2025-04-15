@@ -5,12 +5,12 @@ import java.util.Optional;
 
 public interface ProductCategoryService {
 
-    List<ProductCategoryDTO> getAllProducts();
+    List<ProductCategoryDTO> getAll();
 
-    Optional<ProductCategoryDTO> getProductById(Long id);
+    Optional<ProductCategoryDTO> getById(Long id);
 
-    ProductCategoryDTO createProduct(ProductCategoryDTO productCategoryDTO);
+    ProductCategoryDTO create(ProductCategoryDTO productCategoryDTO);
 
-    ProductCategoryDTO updateProduct(Long id, ProductCategoryDTO productCategoryDTO);
+    ProductCategoryDTO update(Long id, ProductCategoryDTO productCategoryDTO);
 
 }
